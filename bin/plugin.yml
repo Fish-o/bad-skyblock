@@ -1,0 +1,11 @@
+main: me.muffin.skyblock.Main
+name: Skyblock
+author: muffintwt
+version: BETA
+api-version: 1.13
+
+
+commands:
+  skyblock:
+    description: Skyblock's main command.
+    usage: /<command>
