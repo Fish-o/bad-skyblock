@@ -2,7 +2,6 @@ package me.muffin.skyblock;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 
 public class MyVeryOwnRunnable implements Runnable {
