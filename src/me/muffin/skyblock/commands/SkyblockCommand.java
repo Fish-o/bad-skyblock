@@ -1,22 +1,29 @@
 package me.muffin.skyblock.commands;
 
+import java.util.logging.Level;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.muffin.skyblock.CustomBoard;
 import me.muffin.skyblock.Main;
+import me.muffin.skyblock.skyblockmenu.skills.SkillsManager;
+import me.muffin.skyblock.skyblockmenu.skills.SkillsManager.Skill;
 import net.md_5.bungee.api.ChatColor;
 
 public class SkyblockCommand implements CommandExecutor{
 	
 	private Main plugin;
-
-
+	
+	public static CustomBoard board;
+	public static SkillsManager skills;
 
 	public SkyblockCommand(Main plugin) {
 		this.plugin = plugin;
+		board = new CustomBoard(plugin);
 	}
 	
 	
@@ -71,14 +78,13 @@ public class SkyblockCommand implements CommandExecutor{
 						return true;
 					}else {
 						Player p = Bukkit.getServer().getPlayer(args[1]); 
-						double coins = 0;
+						long coins = 0;
 						
-						if (plugin.data.getConfig().contains("players." + p.getUniqueId().toString() + ".coins"));
-							coins = plugin.data.getConfig().getDouble("players." + p.getUniqueId().toString() + ".coins");
+						if (plugin.data.getConfig().contains("players." + p.getUniqueId().toString() + ".skyblock.coins"));
+							coins = plugin.data.getConfig().getLong("players." + p.getUniqueId().toString() + ".skyblock.coins");
 						
-						plugin.data.getConfig().set("players." + p.getUniqueId() + ".coins", (coins + Double.parseDouble(args[2])));
-						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8# &7Set coins of &a" + p.getName() + "&7 to &a" + plugin.data.getConfig().getDouble("players." + p.getUniqueId().toString() + ".coins") + "&7."));
-						plugin.data.saveConfig();
+						this.board.setCoins(p, coins + Long.parseLong(args[2]));
+						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8# &7You have added &a" + args[2] + "&7 coins to the balance of: &a" + p.getName()));
 					}
 				}
 				
@@ -91,8 +97,8 @@ public class SkyblockCommand implements CommandExecutor{
 						return true;
 				}else {
 					Player p = Bukkit.getServer().getPlayer(args[1]);
-					plugin.data.getConfig().set("players." + p.getUniqueId() + ".coins", Double.parseDouble(args[2]));
-					plugin.data.saveConfig();
+					this.board.setCoins(p, Long.parseLong(args[2]));
+					
 					sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8# &7Set the balance of &a" + p.getName() + "&7 to &a" + args[2] + "&7."));
 				}
 				}
@@ -103,13 +109,13 @@ public class SkyblockCommand implements CommandExecutor{
 				if(args.length == 1) {
 					if(sender.hasPermission("skyblock.coins.balance.self")) {
 						Player player = (Player) sender;
-						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8# &7Your balance: &a" + this.plugin.data.getConfig().getInt("players." + player.getUniqueId() + ".coins") + "&7."));
+						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8# &7Your balance: &a" + this.plugin.data.getConfig().getLong("players." + player.getUniqueId() + ".coins") + "&7."));
 					}
 					
 				}else {
 					if(sender.hasPermission("skyblock.coins.balance.others") || sender.hasPermission("skyblock.admin")){
 						Player p = Bukkit.getServer().getPlayer(args[1]);
-						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8# &7Balance of &a" + p.getName() + "&7: &a" + plugin.data.getConfig().getInt("players." + p.getUniqueId() + ".coins") + "&7."));
+						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8# &7Balance of &a" + p.getName() + "&7: &a" + plugin.data.getConfig().getLong("players." + p.getUniqueId() + ".coins") + "&7."));
 					}
 					
 				}
@@ -123,10 +129,10 @@ public class SkyblockCommand implements CommandExecutor{
 				}else{
 					Player player = (Player) sender;
 					if(args[1].equalsIgnoreCase("true")) {
-						plugin.data.getConfig().set("players." + player.getUniqueId() + ".ironman", true);
+						plugin.data.getConfig().set("players." + player.getUniqueId() + ".skyblock.ironman", true);
 						plugin.data.saveConfig();
 					}else if(args[1].equalsIgnoreCase("false")) {
-						plugin.data.getConfig().set("players." + player.getUniqueId() + ".ironman", false);
+						plugin.data.getConfig().set("players." + player.getUniqueId() + ".skyblock.ironman", false);
 						plugin.data.saveConfig();
 					}
 					
@@ -135,10 +141,9 @@ public class SkyblockCommand implements CommandExecutor{
 			}else if(args[0].equalsIgnoreCase("reloaddata")) {
 				if(sender.hasPermission("skyblock.data.reload") || sender.hasPermission("skyblock.admin"))
 					this.plugin.data.reloadConfig();
-			}
 		}
 		return true;
 	}
 	
-	
+	}
 }
