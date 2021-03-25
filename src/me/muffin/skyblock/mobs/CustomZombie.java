@@ -1,5 +1,10 @@
 package me.muffin.skyblock.mobs;
 
+import java.lang.reflect.Field;
+import java.util.Map;
+
+import javax.annotation.Nullable;
+
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_16_R2.CraftWorld;
 
@@ -27,7 +32,8 @@ public class CustomZombie extends EntityZombie {
 				+ ChatColor.RESET + "" + ChatColor.GRAY + "Lv" + String.valueOf(level) + ChatColor.RESET + ""
 				+ ChatColor.DARK_GRAY + "]" + ChatColor.RESET + "" + ChatColor.RED + " " + name + " " + ChatColor.RESET
 				+ "" + ChatColor.GREEN + String.valueOf((int) Math.round(health)) + "" + ChatColor.RESET + "/"
-				+ ChatColor.GREEN + String.valueOf((int) Math.round(health)) + ChatColor.RESET + "" + ChatColor.RED + "❤" + ChatColor.RESET);
+				+ ChatColor.GREEN + String.valueOf((int) Math.round(health)) + ChatColor.RESET + "" + ChatColor.RED
+				+ "❤" + ChatColor.RESET);
 
 		this.setCustomName(health_text);
 		this.setCustomNameVisible(true);
@@ -43,5 +49,22 @@ public class CustomZombie extends EntityZombie {
 		this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
 		this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this));
 
-		}
+	}
+	@SuppressWarnings("unchecked")
+	public static void register(String name, int id, Class<?> registryClass) {
+	   ((Map) getPrivateField("c", EntityTypes.class, null)).put(name, registryClass);
+	   ((Map)getPrivateField("d", EntityTypes.class, null)).put(registryClass, name);
+	   ((Map) getPrivateField("f", EntityTypes.class, null)).put(registryClass, id);
+	}
+	@Nullable
+    public static Object getPrivateField(String fieldName, Class<?> clazz, Object object) {
+        try {
+            Field field = clazz.getDeclaredField(fieldName);
+            field.setAccessible(true);
+            return field.get(object);
+        } catch(NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
