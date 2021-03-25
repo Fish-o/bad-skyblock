@@ -24,7 +24,7 @@ public class Main extends JavaPlugin implements Listener {
 		this.getServer().getPluginManager().registerEvents(new QuitEvent(this), this);
 		this.getServer().getPluginManager().registerEvents(new EventCreatureSpawn(this), this);
 		this.getServer().getPluginManager().registerEvents(new EventEntityDamage(this), this);
-
+		// asdfasdf
 		this.getCommand("skyblock").setExecutor(new SkyblockCommand(this));
 		this.getCommand("skyblock").setTabCompleter(new SkyblockTab());
 		BukkitTask TaskName = new MyVeryOwnRunnable(this).runTaskTimer(this, 20, 20);
