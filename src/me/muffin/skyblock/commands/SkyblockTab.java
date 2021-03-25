@@ -18,6 +18,7 @@ public class SkyblockTab implements TabCompleter {
 		if (arguments.isEmpty()) {
 			arguments.add("help"); 
 			arguments.add("balance");
+			arguments.add("test");
 			if(sender.hasPermission("skyblock.coins.addcoins") || sender.hasPermission("skyblock.admin"))
 				arguments.add("addcoins");
 			if(sender.hasPermission("skyblock.coins.setcoins") || sender.hasPermission("skyblock.admin"))
