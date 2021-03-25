@@ -13,9 +13,9 @@ import me.muffin.skyblock.events.QuitEvent;
 import me.muffin.skyblock.files.PlayerDataManager;
 
 public class Main extends JavaPlugin implements Listener {
-	
+
 	public PlayerDataManager data;
-	
+
 	@Override
 	public void onEnable() {
 		this.data = new PlayerDataManager(this);
@@ -28,15 +28,12 @@ public class Main extends JavaPlugin implements Listener {
 		this.getCommand("skyblock").setExecutor(new SkyblockCommand(this));
 		this.getCommand("skyblock").setTabCompleter(new SkyblockTab());
 		BukkitTask TaskName = new MyVeryOwnRunnable(this).runTaskTimer(this, 20, 20);
-		
-		
+
 	}
+
 	@Override
 	public void onDisable() {
-		
-	}	
-	
-	
-	
-	
+
+	}
+
 }
