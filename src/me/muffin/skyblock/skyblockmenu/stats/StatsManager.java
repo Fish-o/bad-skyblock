@@ -32,7 +32,7 @@ public class StatsManager {
 		FORAGING_FORTUNE
 	}
 	
-	public void addStat(Stat stat, Player player, int amount) {
+	public void gainStat(Stat stat, Player player, int amount) {
 		double currentStat = plugin.data.getConfig().getDouble("players." + player.getUniqueId() + ".skyblock.stats." + stat);
 		
 		double newStat = currentStat + amount;

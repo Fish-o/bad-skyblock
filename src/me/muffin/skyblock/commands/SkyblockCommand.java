@@ -142,8 +142,9 @@ public class SkyblockCommand implements CommandExecutor{
 				if(sender.hasPermission("skyblock.data.reload") || sender.hasPermission("skyblock.admin"))
 					this.plugin.data.reloadConfig();
 		}
-		return true;
+		
 	}
+		return true;
 	
 	}
 }
