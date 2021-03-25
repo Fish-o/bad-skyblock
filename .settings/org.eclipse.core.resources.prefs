@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
 encoding//src/me/muffin/skyblock/CustomBoard.java=UTF-8
+encoding//src/me/muffin/skyblock/events/EventCreatureSpawn.java=UTF-8
+encoding//src/me/muffin/skyblock/mobs/CustomZombie.java=UTF-8

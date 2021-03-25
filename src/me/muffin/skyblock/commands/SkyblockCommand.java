@@ -71,12 +71,12 @@ public class SkyblockCommand implements CommandExecutor{
 						return true;
 					}else {
 						Player p = Bukkit.getServer().getPlayer(args[1]); 
-						double coins = 0.0;
+						double coins = 0;
 						
 						if (plugin.data.getConfig().contains("players." + p.getUniqueId().toString() + ".coins"));
-							coins = plugin.data.getConfig().getInt("players." + p.getUniqueId().toString() + ".coins");
+							coins = plugin.data.getConfig().getDouble("players." + p.getUniqueId().toString() + ".coins");
 						
-						plugin.data.getConfig().set("players." + p.getUniqueId() + ".coins", (coins + Integer.parseInt(args[2])));
+						plugin.data.getConfig().set("players." + p.getUniqueId() + ".coins", (coins + Double.parseDouble(args[2])));
 						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8# &7Set coins of &a" + p.getName() + "&7 to &a" + plugin.data.getConfig().getDouble("players." + p.getUniqueId().toString() + ".coins") + "&7."));
 						plugin.data.saveConfig();
 					}
@@ -91,7 +91,7 @@ public class SkyblockCommand implements CommandExecutor{
 						return true;
 				}else {
 					Player p = Bukkit.getServer().getPlayer(args[1]);
-					plugin.data.getConfig().set("players." + p.getUniqueId() + ".coins", Integer.parseInt(args[2]));
+					plugin.data.getConfig().set("players." + p.getUniqueId() + ".coins", Double.parseDouble(args[2]));
 					plugin.data.saveConfig();
 					sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8# &7Set the balance of &a" + p.getName() + "&7 to &a" + args[2] + "&7."));
 				}
