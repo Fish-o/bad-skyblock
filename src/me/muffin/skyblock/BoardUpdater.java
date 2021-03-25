@@ -5,10 +5,14 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 public class BoardUpdater {
+	
+	
 	private final UUID uuid;
 	private static Map<UUID, Integer> TASKS = new HashMap<UUID, Integer>();
+
 	
 	public BoardUpdater(UUID uuid) {
 		this.uuid = uuid;
@@ -31,6 +35,11 @@ public class BoardUpdater {
 	public void stop() {
 		Bukkit.getScheduler().cancelTask(TASKS.get(uuid));
 		TASKS.remove(uuid);
+	}
+
+	public void createBoard(Player player) {
+		
+		
 	}
 	
 	

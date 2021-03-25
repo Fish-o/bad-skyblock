@@ -8,7 +8,9 @@ import org.bukkit.scheduler.BukkitTask;
 public class MyVeryOwnRunnable implements Runnable {
 
 	private Main plugin;
-
+	CustomBoard board = new CustomBoard(plugin);
+	
+	
 	public MyVeryOwnRunnable(Main plugin) {
 		this.plugin = plugin;
 	}
@@ -27,7 +29,7 @@ public class MyVeryOwnRunnable implements Runnable {
 			public void run() {
 				if(!board.hasID())
 					board.setID(taskID);
-				
+				board.createBoard(player);
 			}
 
 		
