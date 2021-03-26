@@ -26,6 +26,8 @@ public class SkyblockTab implements TabCompleter {
 			arguments.add("ironman"); 
 			if(sender.hasPermission("skyblock.data.reload") || sender.hasPermission("skyblock.admin"))
 				arguments.add("reloaddata");
+			if(sender.hasPermission("skyblock.goto") || sender.hasPermission("skyblock.admin")) 
+				arguments.add("goto");
 		}
 		
 		List<String> result = new ArrayList<String>();

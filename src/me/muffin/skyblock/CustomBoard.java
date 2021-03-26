@@ -4,9 +4,8 @@ import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.logging.Level;
-
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,6 +22,7 @@ public class CustomBoard implements Listener {
 
 	private Main plugin;
 	NumberFormat format = NumberFormat.getInstance(Locale.US);
+	
 
 	public CustomBoard(Main plugin) {
 		this.plugin = plugin;
@@ -39,11 +39,48 @@ public class CustomBoard implements Listener {
 		plugin.data.saveConfig();
 		createScoreboard(player);
 	}
+	
+	public void setIronman(Player player, boolean state) {
+		plugin.data.getConfig().set("players." + player.getUniqueId() + ".skyblock.ironman", state);
+		plugin.data.saveConfig();
+		createScoreboard(player);
+	}
+	
+	public void setWorld(Player player, World world) {
+		plugin.data.getConfig().set("players." + player.getUniqueId() + ".location.world", world.getName());
+		plugin.data.saveConfig();
+		createScoreboard(player);
+	}
 
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	LocalDateTime now = LocalDateTime.now();
 
 	public void createScoreboard(Player player) {
+		
+		String currentLocation = "";
+		
+		switch(player.getWorld().getName()) {
+			case "gold_mine":
+				currentLocation = ChatColor.GOLD + "Gold Mine";
+				break;
+			case "hub" :
+				currentLocation = ChatColor.AQUA + "Hub";
+				break;
+			case "world":
+				currentLocation = ChatColor.GREEN + "Your Island";
+				break;
+			case "barn":
+				currentLocation = ChatColor.AQUA + "The Barn";
+				break;
+			case "mushroom_desert":
+				currentLocation = ChatColor.AQUA + "Mushroom Desert";
+				break;
+			case "deep_caverns":
+				currentLocation = ChatColor.AQUA + "Deep Caverns";
+				break;
+		}
+		
+		
 		ScoreboardManager manager = Bukkit.getScoreboardManager();
 		Scoreboard board = manager.getNewScoreboard();
 		Objective obj = board.registerNewObjective("Scoreboard-1", "dummy",
@@ -57,19 +94,14 @@ public class CustomBoard implements Listener {
 		score3.setScore(9);
 		Score score4 = obj.getScore(ChatColor.GRAY + "time_coming_soon");
 		score4.setScore(8);
-		Score score5 = obj.getScore(ChatColor.GRAY + "⌖" + ChatColor.GREEN + " Your Island");
+		Score score5 = obj.getScore(ChatColor.GRAY + "⏣ " + currentLocation);
 		score5.setScore(7);
 		if (plugin.data.getConfig().getBoolean("players." + player.getUniqueId() + ".skyblock.ironman") == true) {
 			Score score6 = obj.getScore(ChatColor.GRAY + "♲ Ironman");
 			score6.setScore(6);
-		} else {
-			Score score6 = obj.getScore(ChatColor.RESET.toString());
-			score6.setScore(6);
 		}
 		Score score7 = obj.getScore(ChatColor.RESET.toString() + ChatColor.RESET.toString());
 		score7.setScore(5);
-		Score score8 = obj.getScore("Flight duration " + ChatColor.GREEN + "coming_soon");
-		score8.setScore(4);
 		Score score9 = obj.getScore("Purse: " + ChatColor.GOLD
 				+ format.format(plugin.data.getConfig().getLong(
 				"players." + player.getUniqueId() + ".skyblock.coins".toString())));

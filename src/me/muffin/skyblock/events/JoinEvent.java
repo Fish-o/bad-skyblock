@@ -2,8 +2,6 @@ package me.muffin.skyblock.events;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,7 +14,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import me.muffin.skyblock.CustomBoard;
 import me.muffin.skyblock.Main;
 import me.muffin.skyblock.skyblockmenu.skills.SkillsManager.Skill;
 import me.muffin.skyblock.skyblockmenu.stats.StatsManager.Stat;

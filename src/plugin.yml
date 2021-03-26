@@ -9,3 +9,6 @@ commands:
   skyblock:
     description: Skyblock's main command.
     usage: /<command>
+  goto:
+    description: Go to a place in skyblock!
+    usage: /<command> <location> [player]

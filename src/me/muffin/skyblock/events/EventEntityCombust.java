@@ -1,7 +1,5 @@
 package me.muffin.skyblock.events;
 
-import java.util.logging.Level;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,7 +9,6 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 
 import me.muffin.skyblock.Main;
-import me.muffin.skyblock.mobs.CustomZombie;
 
 public class EventEntityCombust  implements Listener{
 	private Plugin plugin;

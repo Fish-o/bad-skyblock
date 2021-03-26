@@ -1,7 +1,5 @@
 package me.muffin.skyblock.commands;
 
-import java.util.logging.Level;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,7 +9,6 @@ import org.bukkit.entity.Player;
 import me.muffin.skyblock.CustomBoard;
 import me.muffin.skyblock.Main;
 import me.muffin.skyblock.skyblockmenu.skills.SkillsManager;
-import me.muffin.skyblock.skyblockmenu.skills.SkillsManager.Skill;
 import net.md_5.bungee.api.ChatColor;
 
 public class SkyblockCommand implements CommandExecutor{
@@ -129,18 +126,20 @@ public class SkyblockCommand implements CommandExecutor{
 				}else{
 					Player player = (Player) sender;
 					if(args[1].equalsIgnoreCase("true")) {
-						plugin.data.getConfig().set("players." + player.getUniqueId() + ".skyblock.ironman", true);
-						plugin.data.saveConfig();
+						board.setIronman(player, true);
 					}else if(args[1].equalsIgnoreCase("false")) {
-						plugin.data.getConfig().set("players." + player.getUniqueId() + ".skyblock.ironman", false);
-						plugin.data.saveConfig();
+						board.setIronman(player, false);
 					}
 					
 				}
-			
+			// RELOAD COMM
 			}else if(args[0].equalsIgnoreCase("reloaddata")) {
 				if(sender.hasPermission("skyblock.data.reload") || sender.hasPermission("skyblock.admin"))
 					this.plugin.data.reloadConfig();
+				
+				// goto comm (change world)
+		}else if(args[0].equalsIgnoreCase("goto")) {
+			
 		}
 		
 	}
