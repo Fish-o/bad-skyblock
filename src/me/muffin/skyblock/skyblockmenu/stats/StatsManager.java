@@ -13,6 +13,7 @@ public class StatsManager {
 	}
 	
 	public enum Stat {
+		DAMAGE,
 		HEALTH,
 		DEFENSE,
 		TRUE_DEFENSE,

@@ -25,7 +25,7 @@ public class Main extends JavaPlugin implements Listener {
 	public static NamespacedKey key_attribute_invisable;
 	public static NamespacedKey key_attribute_combust;
 	public static NamespacedKey key_attribute_ttl;
-	public static PlayerDataManager data;
+	public PlayerDataManager data;
 
 	@Override
 	public void onEnable() {
@@ -37,7 +37,7 @@ public class Main extends JavaPlugin implements Listener {
 		Main.key_attribute_ttl = new NamespacedKey(this, "key_attribute_ttl");
 		
 		
-		Main.data = new PlayerDataManager(this);
+		this.data = new PlayerDataManager(this);
 		this.getServer().getPluginManager().registerEvents(new CustomBoard(this), this);
 		this.data = new PlayerDataManager(this);
 		this.getServer().getPluginManager().registerEvents(new JoinEvent(this), this);

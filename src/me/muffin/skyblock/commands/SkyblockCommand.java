@@ -1,5 +1,7 @@
 package me.muffin.skyblock.commands;
 
+import java.util.logging.Level;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,6 +11,7 @@ import org.bukkit.entity.Player;
 import me.muffin.skyblock.CustomBoard;
 import me.muffin.skyblock.Main;
 import me.muffin.skyblock.skyblockmenu.skills.SkillsManager;
+import me.muffin.skyblock.skyblockmenu.stats.StatsManager.Stat;
 import net.md_5.bungee.api.ChatColor;
 
 public class SkyblockCommand implements CommandExecutor{
@@ -132,15 +135,58 @@ public class SkyblockCommand implements CommandExecutor{
 					}
 					
 				}
+			}
 			// RELOAD COMM
 			}else if(args[0].equalsIgnoreCase("reloaddata")) {
 				if(sender.hasPermission("skyblock.data.reload") || sender.hasPermission("skyblock.admin"))
 					this.plugin.data.reloadConfig();
 				
-				// goto comm (change world)
-		}else if(args[0].equalsIgnoreCase("goto")) {
-			
-		}
+				
+		}if(args[0].equalsIgnoreCase("stats")) {
+			Player player = (Player) sender;
+			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8# &7Viewing stats of player &a" + sender.getName() + "&7."));
+			for (Stat stat : Stat.values()) {
+				double statistic = plugin.data.getConfig().getDouble("players." + player.getUniqueId() + ".skyblock.stat." + stat);
+				if(stat == Stat.HEALTH) {
+					sender.sendMessage(ChatColor.RED + "❤ Health " + ChatColor.WHITE + statistic);
+				}if(stat == Stat.DEFENSE) {
+					sender.sendMessage(ChatColor.GREEN + "❈ Defense " + ChatColor.WHITE + statistic);
+				}if(stat == Stat.TRUE_DEFENSE) {
+					sender.sendMessage(ChatColor.WHITE + "❂ True Defense " + statistic);
+				}if(stat == Stat.DAMAGE) {
+					sender.sendMessage(ChatColor.RED + "❁ Damage " + ChatColor.WHITE + statistic) ;
+				}if(stat == Stat.STRENGTH) {
+					sender.sendMessage(ChatColor.RED + "❁ Strength " + ChatColor.WHITE + statistic);
+				}if(stat == Stat.SPEED) {
+					sender.sendMessage(ChatColor.WHITE + "✦ Speed " + statistic);
+				}if(stat == Stat.CRIT_CHANCE) {
+					sender.sendMessage(ChatColor.BLUE + "☣ Crit Chance " + ChatColor.WHITE + statistic);
+				}if(stat == Stat.CRIT_DMG) {
+					sender.sendMessage(ChatColor.BLUE + "☠ Crit Damage " + ChatColor.WHITE + statistic);
+				}if(stat == Stat.INTELLIGENCE) {
+					sender.sendMessage(ChatColor.AQUA + "✎ Intelligence " + ChatColor.WHITE + statistic);
+				}if(stat == Stat.MINING_SPEED) {
+					sender.sendMessage(ChatColor.GOLD + "⸕ Mining Speed " + ChatColor.WHITE + statistic);
+				}if(stat == Stat.SEACREATURESPAWNRATE) {
+					sender.sendMessage(ChatColor.DARK_AQUA + "α Sea Creature Chance " + ChatColor.WHITE + statistic);
+				}if(stat == Stat.MAGICFIND) {
+					sender.sendMessage(ChatColor.AQUA + "✯ Magic Find " + ChatColor.WHITE + statistic);
+				}if(stat == Stat.PETLUCK) {
+					sender.sendMessage(ChatColor.LIGHT_PURPLE + "♣ Pet Luck " + ChatColor.WHITE + statistic);
+				}if(stat == Stat.ABILITYDAMAGE) {
+					sender.sendMessage(ChatColor.RED + "✹ Ability Damage " + ChatColor.WHITE + statistic);
+				}if(stat == Stat.FEROCITY) {
+					sender.sendMessage(ChatColor.RED + "⫽ Ferocity " + ChatColor.WHITE + statistic);
+				}if(stat == Stat.MINING_FORTUNE) {
+					sender.sendMessage(ChatColor.GOLD + "☘ Mining Fortune " + ChatColor.WHITE + statistic);
+				}if(stat == Stat.FARMING_FORTUNE) {
+					sender.sendMessage(ChatColor.GOLD + "☘ Farming Fortune " + ChatColor.WHITE + statistic);
+				}if(stat == Stat.FORAGING_FORTUNE) {
+					sender.sendMessage(ChatColor.GOLD + "☘ Foraging Fortune " + ChatColor.WHITE + statistic);
+				}
+				
+					
+			}
 		
 	}
 		return true;
