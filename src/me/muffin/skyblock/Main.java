@@ -1,7 +1,6 @@
 package me.muffin.skyblock;
 
 import org.bukkit.NamespacedKey;
-import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,9 +11,11 @@ import me.muffin.skyblock.commands.SkyblockTab;
 import me.muffin.skyblock.events.EventCreatureSpawn;
 import me.muffin.skyblock.events.EventEntityCombust;
 import me.muffin.skyblock.events.EventEntityDamage;
+import me.muffin.skyblock.events.InteractEvent;
 import me.muffin.skyblock.events.JoinEvent;
 import me.muffin.skyblock.events.SignEvent;
 import me.muffin.skyblock.files.PlayerDataManager;
+import me.muffin.skyblock.skyblockmenu.SkyblockMenuGUI;
 import me.muffin.skyblock.skyblockmenu.skills.SkillsManager;
 import me.muffin.skyblock.skyblockmenu.stats.StatsManager;
 
@@ -46,6 +47,8 @@ public class Main extends JavaPlugin implements Listener {
 		this.getServer().getPluginManager().registerEvents(new EventEntityCombust(this), this);
 		this.getServer().getPluginManager().registerEvents(new CustomBoard(this), this);
 		this.getServer().getPluginManager().registerEvents(new SignEvent(this), this);
+		this.getServer().getPluginManager().registerEvents(new SkyblockMenuGUI(), this);
+		this.getServer().getPluginManager().registerEvents(new InteractEvent(), this);
 		this.getCommand("skyblock").setExecutor(new SkyblockCommand(this));
 		this.getCommand("skyblock").setTabCompleter(new SkyblockTab());
 		this.getCommand("goto").setExecutor(new GotoCommand(this));

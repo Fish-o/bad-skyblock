@@ -20,6 +20,7 @@ public class SkyblockTab implements TabCompleter {
 			arguments.add("balance");
 			arguments.add("test");
 			arguments.add("stats");
+			arguments.add("menu");
 			if(sender.hasPermission("skyblock.coins.addcoins") || sender.hasPermission("skyblock.admin"))
 				arguments.add("addcoins");
 			if(sender.hasPermission("skyblock.coins.setcoins") || sender.hasPermission("skyblock.admin"))

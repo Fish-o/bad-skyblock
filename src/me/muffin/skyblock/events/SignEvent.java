@@ -2,7 +2,6 @@ package me.muffin.skyblock.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
@@ -10,7 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import me.muffin.skyblock.CustomBoard;
 import me.muffin.skyblock.IslandSwitcher;
 import me.muffin.skyblock.Main;
 
@@ -52,28 +50,28 @@ public class SignEvent implements Listener{
 		}
 		switch(e.getLine(1)) {
 			case "hub":
-				e.setLine(1, ChatColor.GRAY + "⏣" +ChatColor.AQUA + " Hub");
+				e.setLine(1, ChatColor.GRAY + "â�£" +ChatColor.AQUA + " Hub");
 				e.setLine(3, "hub");
 				break;
 			case "world":
-				e.setLine(1, ChatColor.GRAY + "⏣" +ChatColor.GREEN + " Your Island");
+				e.setLine(1, ChatColor.GRAY + "â�£" +ChatColor.GREEN + " Your Island");
 				e.setLine(3, "world");
 				break;
 			case "gold_mine":
-				e.setLine(1, ChatColor.GRAY + "⏣" +ChatColor.GOLD + " Gold Mine");
+				e.setLine(1, ChatColor.GRAY + "â�£" +ChatColor.GOLD + " Gold Mine");
 				e.setLine(3, "gold_mine");
 				break;
 			case "barn":
-				e.setLine(1, ChatColor.GRAY + "⏣" +ChatColor.AQUA + " The Barn");
+				e.setLine(1, ChatColor.GRAY + "â�£" +ChatColor.AQUA + " The Barn");
 				e.setLine(3, "barn");
 				break;
 			case "mushroom_desert":
-				e.setLine(1,ChatColor.GRAY + "⏣" + ChatColor.AQUA + " Mushroom");
+				e.setLine(1,ChatColor.GRAY + "â�£" + ChatColor.AQUA + " Mushroom");
 				e.setLine(2, ChatColor.AQUA + "Desert");
 				e.setLine(3, "mushroom_desert");
 				break;
 			case "deep_caverns":
-				e.setLine(1, ChatColor.GRAY + "⏣" + ChatColor.AQUA + " Deep Caverns");
+				e.setLine(1, ChatColor.GRAY + "â�£" + ChatColor.AQUA + " Deep Caverns");
 				e.setLine(3, "deep_caverns");
 				break;
 		}

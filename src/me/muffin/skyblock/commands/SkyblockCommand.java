@@ -1,7 +1,5 @@
 package me.muffin.skyblock.commands;
 
-import java.util.logging.Level;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import me.muffin.skyblock.CustomBoard;
 import me.muffin.skyblock.Main;
+import me.muffin.skyblock.skyblockmenu.SkyblockMenuGUI;
 import me.muffin.skyblock.skyblockmenu.skills.SkillsManager;
 import me.muffin.skyblock.skyblockmenu.stats.StatsManager.Stat;
 import net.md_5.bungee.api.ChatColor;
@@ -17,13 +16,12 @@ import net.md_5.bungee.api.ChatColor;
 public class SkyblockCommand implements CommandExecutor{
 	
 	private Main plugin;
-	
-	public static CustomBoard board;
 	public static SkillsManager skills;
-
+	
+	CustomBoard board = new CustomBoard(plugin);
+	SkyblockMenuGUI menu = new SkyblockMenuGUI();
 	public SkyblockCommand(Main plugin) {
 		this.plugin = plugin;
-		board = new CustomBoard(plugin);
 	}
 	
 	
@@ -102,6 +100,14 @@ public class SkyblockCommand implements CommandExecutor{
 					sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8# &7Set the balance of &a" + p.getName() + "&7 to &a" + args[2] + "&7."));
 				}
 				}
+			}else if(args[0].equalsIgnoreCase("menu")) {
+				if(!(sender instanceof Player)) {
+					sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8# *aConsole&7 cannot open their skyblock menu."));
+					return true;
+				}
+				Player player = (Player) sender;
+				menu.createInv(player);
+				
 			}
 			//balance command
 			else if(args[0].equalsIgnoreCase("balance")) {
@@ -142,7 +148,7 @@ public class SkyblockCommand implements CommandExecutor{
 					this.plugin.data.reloadConfig();
 				
 				
-		}if(args[0].equalsIgnoreCase("stats")) {
+		}else if(args[0].equalsIgnoreCase("stats")) {
 			Player player = (Player) sender;
 			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8# &7Viewing stats of player &a" + sender.getName() + "&7."));
 			for (Stat stat : Stat.values()) {

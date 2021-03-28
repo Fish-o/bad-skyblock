@@ -11,6 +11,7 @@ import org.bukkit.plugin.Plugin;
 import me.muffin.skyblock.Main;
 
 public class EventEntityCombust  implements Listener{
+	@SuppressWarnings("unused")
 	private Plugin plugin;
 	public EventEntityCombust(Plugin plugin) {
 		this.plugin = plugin;
